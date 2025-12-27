@@ -29,7 +29,7 @@ class blackjackDialog: public wxDialog
 
         //(*Handlers(blackjackDialog)
         void OnQuit(wxCommandEvent& event);
-        void OnAbout(wxCommandEvent& event);
+        void OnGuzikKontClick(wxCommandEvent& event);
         //*)
 
         //(*Identifiers(blackjackDialog)

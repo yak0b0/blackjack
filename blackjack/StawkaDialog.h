@@ -35,6 +35,7 @@ class StawkaDialog: public wxDialog
     private:
 
         //(*Handlers(StawkaDialog)
+        void OnGuzikZatwierdzClick(wxCommandEvent& event);
         //*)
 
         DECLARE_EVENT_TABLE()

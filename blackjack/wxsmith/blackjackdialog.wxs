@@ -21,6 +21,7 @@
 						<item>Medium</item>
 						<item>Hard</item>
 					</content>
+					<selection>0</selection>
 				</object>
 				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
@@ -30,6 +31,7 @@
 				<object class="wxButton" name="ID_BUTTON1" variable="GuzikKont" member="yes">
 					<label>Kontynuuj</label>
 					<size>259,23</size>
+					<handler function="OnGuzikKontClick" entry="EVT_BUTTON" />
 				</object>
 				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>

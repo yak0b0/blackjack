@@ -15,6 +15,9 @@
 #include <wx/string.h>
 //*)
 
+#undef _
+#define _(s) wxString::FromUTF8(s)
+
 //helper functions
 enum wxbuildinfoformat {
     short_f, long_f };
@@ -62,7 +65,7 @@ blackjackDialog::blackjackDialog(wxWindow* parent,wxWindowID id)
     TrudnoscText = new wxStaticText(this, ID_STATICTEXT1, _("Wybierz poziom trudności:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     FlexGridSizer1->Add(TrudnoscText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     ComboTrudnosc = new wxComboBox(this, ID_COMBOBOX1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_COMBOBOX1"));
-    ComboTrudnosc->Append(_("Easy"));
+    ComboTrudnosc->SetSelection( ComboTrudnosc->Append(_("Easy")) );
     ComboTrudnosc->Append(_("Medium"));
     ComboTrudnosc->Append(_("Hard"));
     FlexGridSizer1->Add(ComboTrudnosc, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -70,6 +73,8 @@ blackjackDialog::blackjackDialog(wxWindow* parent,wxWindowID id)
     FlexGridSizer1->Add(GuzikKont, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(FlexGridSizer1);
     FlexGridSizer1->SetSizeHints(this);
+
+    Connect(ID_BUTTON1, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&blackjackDialog::OnGuzikKontClick);
     //*)
 }
 
@@ -84,8 +89,14 @@ void blackjackDialog::OnQuit(wxCommandEvent& event)
     Close();
 }
 
-void blackjackDialog::OnAbout(wxCommandEvent& event)
+#include "StawkaDialog.h"
+
+extern wxString poziom;
+
+
+void blackjackDialog::OnGuzikKontClick(wxCommandEvent& event)
 {
-    wxString msg = wxbuildinfo(long_f);
-    wxMessageBox(msg, _("Welcome to..."));
+    StawkaDialog stawka(this);
+    poziom = ComboTrudnosc->GetValue();
+    stawka.ShowModal();
 }

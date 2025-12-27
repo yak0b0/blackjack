@@ -28,12 +28,14 @@ StawkaDialog::StawkaDialog(wxWindow* parent,wxWindowID id)
     FlexGridSizer1->Add(ZaIleText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     LicznikText = new wxStaticText(this, ID_STATICTEXT2, _("Licznik pieniedzy"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     FlexGridSizer1->Add(LicznikText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    KwotaCtrl = new wxTextCtrl(this, ID_TEXTCTRL1, _("Text"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    KwotaCtrl = new wxTextCtrl(this, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     FlexGridSizer1->Add(KwotaCtrl, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     GuzikZatwierdz = new wxButton(this, ID_BUTTON1, _("Zatwierdz"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     FlexGridSizer1->Add(GuzikZatwierdz, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(FlexGridSizer1);
     FlexGridSizer1->SetSizeHints(this);
+
+    Connect(ID_BUTTON1, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&StawkaDialog::OnGuzikZatwierdzClick);
     //*)
 }
 
@@ -43,3 +45,11 @@ StawkaDialog::~StawkaDialog()
     //*)
 }
 
+#include "GraDialog.h"
+
+void StawkaDialog::OnGuzikZatwierdzClick(wxCommandEvent& event)
+{
+        GraDialog gra(this);
+        gra.ShowModal();
+
+}

@@ -13,11 +13,16 @@ const wxWindowID GraDialog::ID_BUTTON2 = wxNewId();
 const wxWindowID GraDialog::ID_BUTTON3 = wxNewId();
 const wxWindowID GraDialog::ID_BUTTON4 = wxNewId();
 //*)
+#include <wx/msgdlg.h>
 
 BEGIN_EVENT_TABLE(GraDialog,wxDialog)
     //(*EventTable(GraDialog)
     //*)
 END_EVENT_TABLE()
+
+
+
+wxString poziom;
 
 GraDialog::GraDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
@@ -53,6 +58,8 @@ GraDialog::GraDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
     SetSizer(FlexGridSizer1);
     FlexGridSizer1->SetSizeHints(this);
     //*)
+
+    wxMessageBox(_("poziom gry: ")+poziom);
 }
 
 GraDialog::~GraDialog()
