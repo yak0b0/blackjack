@@ -1,19 +1,19 @@
 /***************************************************************
  * Name:      blackjackMain.cpp
  * Purpose:   Code for Application Frame
- * Author:    Jakub Żołdak, Jakub Żmuda, Katarzyna Żelazko (s104627@pollub.edu.pl, s104626@pollub.edu.pl, s104625@pollub.edu.pl)
- * Created:   2025-12-11
- * Copyright: Jakub Żołdak, Jakub Żmuda, Katarzyna Żelazko ()
+ * Author:    ŻŻŻ ()
+ * Created:   2025-12-15
+ * Copyright: ŻŻŻ ()
  * License:
  **************************************************************/
 
 #include "blackjackMain.h"
 #include <wx/msgdlg.h>
+#include "StawkaDialog.h"
+
 
 //(*InternalHeaders(blackjackDialog)
-#include <wx/font.h>
 #include <wx/intl.h>
-#include <wx/settings.h>
 #include <wx/string.h>
 //*)
 
@@ -45,9 +45,8 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 
 //(*IdInit(blackjackDialog)
 const wxWindowID blackjackDialog::ID_STATICTEXT1 = wxNewId();
+const wxWindowID blackjackDialog::ID_COMBOBOX1 = wxNewId();
 const wxWindowID blackjackDialog::ID_BUTTON1 = wxNewId();
-const wxWindowID blackjackDialog::ID_STATICLINE1 = wxNewId();
-const wxWindowID blackjackDialog::ID_BUTTON2 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(blackjackDialog,wxDialog)
@@ -58,27 +57,21 @@ END_EVENT_TABLE()
 blackjackDialog::blackjackDialog(wxWindow* parent,wxWindowID id)
 {
     //(*Initialize(blackjackDialog)
-    Create(parent, id, _("wxWidgets app"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-    BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
-    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Welcome to\nwxWidgets"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
-    wxFont StaticText1Font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-    if ( !StaticText1Font.Ok() ) StaticText1Font = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
-    StaticText1Font.SetPointSize(20);
-    StaticText1->SetFont(StaticText1Font);
-    BoxSizer1->Add(StaticText1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 10);
-    BoxSizer2 = new wxBoxSizer(wxVERTICAL);
-    Button1 = new wxButton(this, ID_BUTTON1, _("About"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    BoxSizer2->Add(Button1, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    StaticLine1 = new wxStaticLine(this, ID_STATICLINE1, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE1"));
-    BoxSizer2->Add(StaticLine1, 0, wxALL|wxEXPAND, 4);
-    Button2 = new wxButton(this, ID_BUTTON2, _("Quit"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
-    BoxSizer2->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    BoxSizer1->Add(BoxSizer2, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 4);
-    SetSizer(BoxSizer1);
-    BoxSizer1->SetSizeHints(this);
+    wxFlexGridSizer* FlexGridSizer1;
 
-    Connect(ID_BUTTON1, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&blackjackDialog::OnAbout);
-    Connect(ID_BUTTON2, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&blackjackDialog::OnQuit);
+    Create(parent, wxID_ANY, _("wxWidgets app"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
+    FlexGridSizer1 = new wxFlexGridSizer(3, 1, 0, 0);
+    TrudnoscText = new wxStaticText(this, ID_STATICTEXT1, _("Wybierz poziom trudności:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+    FlexGridSizer1->Add(TrudnoscText, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    ComboTrudnosc = new wxComboBox(this, ID_COMBOBOX1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_COMBOBOX1"));
+    ComboTrudnosc->Append(_("Easy"));
+    ComboTrudnosc->Append(_("Medium"));
+    ComboTrudnosc->Append(_("Hard"));
+    FlexGridSizer1->Add(ComboTrudnosc, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    GuzikKont = new wxButton(this, ID_BUTTON1, _("Kontynuuj"), wxDefaultPosition, wxSize(259,23), 0, wxDefaultValidator, _T("ID_BUTTON1"));
+    FlexGridSizer1->Add(GuzikKont, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    SetSizer(FlexGridSizer1);
+    FlexGridSizer1->SetSizeHints(this);
     //*)
 }
 
@@ -97,4 +90,16 @@ void blackjackDialog::OnAbout(wxCommandEvent& event)
 {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
+
+    StawkaDialog dlg(this);
+
+    if (dlg.ShowModal() == wxID_OK)
+    {
+        int stawka = dlg.GetStawka();
+        wxMessageBox(
+            "Wybrana stawka: " + wxString::Format("%d", stawka),
+            "TEST",
+            wxOK | wxICON_INFORMATION
+        );
+    }
 }

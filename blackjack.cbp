@@ -65,6 +65,10 @@
 			<Add library="libuxtheme.a" />
 			<Add library="libimm32.a" />
 		</Linker>
+		<Unit filename="GraDialog.cpp" />
+		<Unit filename="GraDialog.h" />
+		<Unit filename="StawkaDialog.cpp" />
+		<Unit filename="StawkaDialog.h" />
 		<Unit filename="blackjackApp.cpp" />
 		<Unit filename="blackjackApp.h" />
 		<Unit filename="blackjackMain.cpp" />
@@ -72,12 +76,16 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="wxsmith/GraDialog.wxs" />
+		<Unit filename="wxsmith/StawkaDialog.wxs" />
 		<Unit filename="wxsmith/blackjackdialog.wxs" />
 		<Extensions>
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="blackjackApp.cpp" main="blackjackDialog" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxDialog wxs="wxsmith/blackjackdialog.wxs" src="blackjackMain.cpp" hdr="blackjackMain.h" fwddecl="0" i18n="1" name="blackjackDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/StawkaDialog.wxs" src="StawkaDialog.cpp" hdr="StawkaDialog.h" fwddecl="0" i18n="1" name="StawkaDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/GraDialog.wxs" src="GraDialog.cpp" hdr="GraDialog.h" fwddecl="0" i18n="1" name="GraDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>
