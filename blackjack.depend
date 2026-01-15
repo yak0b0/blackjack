@@ -5838,7 +5838,7 @@
 	<wx/stattext.h>
 	<wx/textctrl.h>
 
-1768234383 source:c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\gradialog.cpp
+1768467163 source:c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\gradialog.cpp
 	"GraDialog.h"
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -5850,8 +5850,10 @@
 	<wx/image.h>
 	<wx/intl.h>
 	<wx/string.h>
+	<wx/string.h>
+	<wx/filename.h>
 
-1768232494 c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\gradialog.h
+1768467163 c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\gradialog.h
 	<wx/button.h>
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -5908,9 +5910,27 @@
 
 1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\msw\rcdefs.h
 
-1768234032 source:c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\stawkadialog.cpp
+1768311803 source:c:\users\burne\desktop\uczelnia\semestr_3\cpp_projekt\lab_10_laczenie\kasia\blackjack\stawkadialog.cpp
 	"StawkaDialog.h"
-	<wx/intl.h>
+	<wx/msgdlg.h>
 	<wx/string.h>
 	"GraDialog.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\filename.h
+	"wx/arrstr.h"
+	"wx/filefn.h"
+	"wx/datetime.h"
+	"wx/intl.h"
+	"wx/longlong.h"
+	"wx/file.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\file.h
+	"wx/defs.h"
+	"wx/string.h"
+	"wx/filefn.h"
+	"wx/convauto.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\convauto.h
+	"wx/strconv.h"
+	"wx/fontenc.h"
 

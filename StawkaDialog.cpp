@@ -6,6 +6,12 @@
 #include <wx/string.h>
 //*)
 
+#include <wx/string.h>
+
+#undef _
+#define _(s) wxString::FromUTF8(s)
+
+
 //(*IdInit(StawkaDialog)
 const wxWindowID StawkaDialog::ID_STATICTEXT1 = wxNewId();
 const wxWindowID StawkaDialog::ID_STATICTEXT2 = wxNewId();
@@ -59,21 +65,21 @@ void StawkaDialog::OnGuzikZatwierdzClick(wxCommandEvent& event)
 
         if (!KwotaCtrl->GetValue().ToLong(&wpisanaStawka))
         {
-            wxMessageBox("Podaj poprawną liczbę!", "Błąd",
+            wxMessageBox(_("Podaj poprawną liczbę!"), _("Błąd"),
                          wxOK | wxICON_ERROR);
             return;
         }
 
         if (wpisanaStawka <= 0)
         {
-            wxMessageBox("Stawka musi być większa od 0!", "Błąd",
+            wxMessageBox(_("Stawka musi być większa od 0!"), _("Błąd"),
                          wxOK | wxICON_ERROR);
             return;
         }
 
         if (wpisanaStawka > saldo)
         {
-            wxMessageBox("Nie masz tylu pieniędzy!", "Błąd",
+            wxMessageBox(_("Nie masz tylu pieniędzy!"), _("Błąd"),
                          wxOK | wxICON_ERROR);
             return;
         }
