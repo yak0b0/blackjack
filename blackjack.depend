@@ -6117,12 +6117,13 @@
 1770212980 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\blackjackapp.h
 	<wx/app.h>
 
-1770212980 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\stawkadialog.h
+1770383786 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\stawkadialog.h
+	<wx/bmpbuttn.h>
 	<wx/button.h>
+	<wx/checkbox.h>
 	<wx/dialog.h>
 	<wx/sizer.h>
 	<wx/stattext.h>
-	<wx/textctrl.h>
 
 1770212980 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\blackjackmain.cpp
 	"blackjackMain.h"
@@ -6134,7 +6135,7 @@
 1770212980 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\blackjackmain.h
 	<wx/dialog.h>
 
-1770217568 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\gradialog.cpp
+1770385761 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\gradialog.cpp
 	"GraDialog.h"
 	<wx/bitmap.h>
 	<wx/image.h>
@@ -6152,7 +6153,7 @@
 	<wx/string.h>
 	<wx/filename.h>
 
-1770212980 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\gradialog.h
+1770384365 c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\gradialog.h
 	<wx/button.h>
 	<wx/dialog.h>
 	<wx/sizer.h>
@@ -6169,10 +6170,10 @@
 	<wx/statbmp.h>
 	<wx/stattext.h>
 
-1770212980 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\resource.rc
+1770385380 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\resource.rc
 	"wx/msw/wx.rc"
 
-1770217363 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\stawkadialog.cpp
+1770385761 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\stawkadialog.cpp
 	"StawkaDialog.h"
 	"blackjackApp.h"
 	<wx/msgdlg.h>
@@ -6181,7 +6182,7 @@
 	<wx/string.h>
 	"GraDialog.h"
 
-1770217320 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\wynikdialog.cpp
+1770385883 source:c:\users\kuba\desktop\github_cpp_blackjack_folder\blackjack-master (1)\blackjack-master\wynikdialog.cpp
 	"WynikDialog.h"
 	"StawkaDialog.h"
 	"blackjackMain.h"
@@ -6189,4 +6190,63 @@
 	<wx/string.h>
 	<wx/intl.h>
 	<wx/string.h>
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\bmpbuttn.h
+	"wx/defs.h"
+	"wx/button.h"
+	"wx/univ/bmpbuttn.h"
+	"wx/msw/bmpbuttn.h"
+	"wx/motif/bmpbuttn.h"
+	"wx/gtk/bmpbuttn.h"
+	"wx/gtk1/bmpbuttn.h"
+	"wx/osx/bmpbuttn.h"
+	"wx/qt/bmpbuttn.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\univ\bmpbuttn.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\msw\bmpbuttn.h
+	"wx/button.h"
+	"wx/bitmap.h"
+	"wx/brush.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\motif\bmpbuttn.h
+	"wx/motif/bmpmotif.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\gtk\bmpbuttn.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\gtk1\bmpbuttn.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\osx\bmpbuttn.h
+	"wx/button.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\qt\bmpbuttn.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\checkbox.h
+	"wx/defs.h"
+	"wx/control.h"
+	"wx/univ/checkbox.h"
+	"wx/msw/checkbox.h"
+	"wx/motif/checkbox.h"
+	"wx/gtk/checkbox.h"
+	"wx/gtk1/checkbox.h"
+	"wx/osx/checkbox.h"
+	"wx/qt/checkbox.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\univ\checkbox.h
+	"wx/button.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\msw\checkbox.h
+	"wx/msw/ownerdrawnbutton.h"
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\msw\ownerdrawnbutton.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\motif\checkbox.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\gtk\checkbox.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\gtk1\checkbox.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\osx\checkbox.h
+
+1745522469 c:\cpp_dodatki\wxwidgets-3.2.8-mono64\include\wx\qt\checkbox.h
 

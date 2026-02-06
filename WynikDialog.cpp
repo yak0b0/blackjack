@@ -38,7 +38,8 @@ WynikDialog::WynikDialog(wxWindow* parent,wxWindowID id)
     wxFlexGridSizer* FlexGridSizer1;
     wxFlexGridSizer* TextSizer;
 
-    Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
+    Create(parent, id, _("WYNIK"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
+    SetBackgroundColour(wxColour(255,255,255));
     FlexGridSizer1 = new wxFlexGridSizer(1, 2, 0, 0);
     FlexGridSizer1->AddGrowableCol(0);
     FlexGridSizer1->AddGrowableRow(0);
@@ -58,22 +59,16 @@ WynikDialog::WynikDialog(wxWindow* parent,wxWindowID id)
     FlexGridSizer1->Add(TextSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(FlexGridSizer1);
     FlexGridSizer1->SetSizeHints(this);
+    Center();
 
     Connect(ID_BUTTON3, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&WynikDialog::PlayAgainClick);
     Connect(ID_BUTTON4, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&WynikDialog::ExitProgramClick);
     //*)
 
     int newWidth = 225;
-
     int newHeight = 225;
 
     if(_wynik == 2){
-            /*
-        wxBitmap ferngit = wxBitmap("images/sad.jpg");
-        int newWidth = 200;
-        int newHeight = 200;
-        ferngit = wxBitmap(ferngit.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH));
-        */
         Obrazek->SetBitmap(wxBitmap("images/sad.jpg", wxBITMAP_TYPE_JPEG).ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH));
         WynikText->SetLabel(_("Wygrał krupier!"));
         IleStawkaText->SetLabel(_("Przegrałeś ") + wxString::Format("%d", ___stawka) + _(" zł") );

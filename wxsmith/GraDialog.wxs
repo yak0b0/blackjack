@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="GraDialog">
+		<title>KASYNO</title>
+		<centered>1</centered>
+		<bg>#00C882</bg>
 		<id_arg>0</id_arg>
 		<object class="wxFlexGridSizer" variable="FlexGridSizer1" member="no">
 			<cols>2</cols>
@@ -146,14 +149,6 @@
 								<object class="wxButton" name="ID_BUTTON3" variable="Button3" member="yes">
 									<label>Double</label>
 									<handler function="DoubleClick" entry="EVT_BUTTON" />
-								</object>
-								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-								<border>5</border>
-								<option>1</option>
-							</object>
-							<object class="sizeritem">
-								<object class="wxButton" name="ID_BUTTON4" variable="Button4" member="yes">
-									<label>Split</label>
 								</object>
 								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 								<border>5</border>

@@ -41,7 +41,6 @@ const wxWindowID GraDialog::ID_STATICTEXT4 = wxNewId();
 const wxWindowID GraDialog::ID_BUTTON1 = wxNewId();
 const wxWindowID GraDialog::ID_BUTTON2 = wxNewId();
 const wxWindowID GraDialog::ID_BUTTON3 = wxNewId();
-const wxWindowID GraDialog::ID_BUTTON4 = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(GraDialog,wxDialog)
@@ -64,7 +63,8 @@ GraDialog::GraDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
     wxFlexGridSizer* WartoscKrupieraSizer;
     wxFlexGridSizer* WartoscSizer;
 
-    Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
+    Create(parent, wxID_ANY, _("KASYNO"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("wxID_ANY"));
+    SetBackgroundColour(wxColour(0,200,130));
     FlexGridSizer1 = new wxFlexGridSizer(2, 2, 0, 0);
     FlexGridSizer1->AddGrowableCol(0);
     FlexGridSizer1->AddGrowableCol(1);
@@ -104,21 +104,16 @@ GraDialog::GraDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
     GuzikiSizer->Add(Button2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     Button3 = new wxButton(this, ID_BUTTON3, _("Double"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
     GuzikiSizer->Add(Button3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    Button4 = new wxButton(this, ID_BUTTON4, _("Split"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON4"));
-    GuzikiSizer->Add(Button4, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     OkienkoUzytkownikaSizer->Add(GuzikiSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     FlexGridSizer1->Add(OkienkoUzytkownikaSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     SetSizer(FlexGridSizer1);
     FlexGridSizer1->SetSizeHints(this);
+    Center();
 
     Connect(ID_BUTTON1, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&GraDialog::HitClick);
     Connect(ID_BUTTON2, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&GraDialog::StandClick);
     Connect(ID_BUTTON3, wxEVT_COMMAND_BUTTON_CLICKED, (wxObjectEventFunction)&GraDialog::DoubleClick);
     //*)
-
-    /*
-    ShowFullScreen(true, wxFULLSCREEN_ALL);
-    */
 
     this->FlexKrupier = FlexKrupier;
     this -> FlexUzytkownik = FlexUzytkownik;
@@ -131,9 +126,6 @@ GraDialog::GraDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxS
     DealInitialPlayerCards();
     DealInitialDealerCards();
     CheckForNaturalBlackjack();
-
-
-
 }
 
 GraDialog::~GraDialog()
@@ -155,15 +147,10 @@ void GraDialog::LoadCards()
         {
             wxString path = wxString::Format("images/%s_%s.png", suit, rank);
             wxBitmap bmp(path, wxBITMAP_TYPE_PNG);
-
             if (bmp.IsOk())
             {
                 deck.push_back(bmp);
                 cardPaths.push_back(path);
-            }
-            else
-            {
-                wxLogError("Nie udało się załadować karty: %s", path);
             }
         }
     }
@@ -171,10 +158,6 @@ void GraDialog::LoadCards()
     int newWidth = 100;
     int newHeight = 80 * 1.6;
     cardBack = cardBack.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
-    if (!cardBack.IsOk())
-    {
-        wxLogError("Nie udało się załadować back_light.png");
-    }
 }
 
 void GraDialog::DealInitialPlayerCards()
@@ -188,17 +171,14 @@ void GraDialog::DealInitialPlayerCards()
         int newHeight = 80 * 1.6;
         bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
         wxStaticBitmap* card = new wxStaticBitmap(this, wxID_ANY, bmp);
-
         FlexUzytkownik->Add(card, 1, wxALL | wxALIGN_CENTER, 5);
         RefreshGameLayout();
         playerCards.push_back(card);
         playerCardPaths.push_back(cardPaths[index]);
-
         playerValue += GetCardValue(cardPaths[index]);
         playerValue = AdjustForAces(playerCardPaths);
         UpdatePlayerValue();
     }
-
     FlexUzytkownik->Layout();
     Layout();
     Fit();
@@ -217,19 +197,15 @@ void GraDialog::DealInitialDealerCards()
     RefreshGameLayout();
     dealerCards.push_back(card1);
     dealerCardPaths.push_back(cardPaths[index1]);
-
     dealerValue = AdjustForAces(dealerCardPaths);
     UpdateDealerValue();
-
     int index2 = rand() % deck.size();
     dealerHiddenCardIndex = index2;
-
     wxStaticBitmap* card2 = new wxStaticBitmap(this, wxID_ANY, cardBack);
     FlexKrupier->Add(card2, 1, wxALL | wxALIGN_CENTER, 5);
     RefreshGameLayout();
     dealerCards.push_back(card2);
     dealerCardPaths.push_back(cardPaths[index2]);
-
     FlexKrupier->Layout();
     Layout();
     Fit();
@@ -241,65 +217,40 @@ void GraDialog::HitClick(wxCommandEvent& event)
     Button1->Disable();
     Button2->Disable();
     Button3->Disable();
-    Button4->Disable();
     Layout();
     Fit();
     int index = rand() % deck.size();
-
     wxBitmap bmp = deck[index];
     int newWidth = 100;
     int newHeight = 80 * 1.6;
     bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
     wxStaticBitmap* card = new wxStaticBitmap(this, wxID_ANY, bmp);
-
     FlexUzytkownik->Add(card, 1, wxALL | wxALIGN_CENTER, 5);
     RefreshGameLayout();
     playerCards.push_back(card);
     playerCardPaths.push_back(cardPaths[index]);
-
     playerValue += GetCardValue(cardPaths[index]);
     playerValue = AdjustForAces(playerCardPaths);
     UpdatePlayerValue();
-
     FlexUzytkownik->Layout();
     Layout();
     Fit();
-
     if (playerValue > 21)
     {
         Delay(2500);
-        /*
-        wxMessageBox(_("Za dużo! Wygrywa krupier!"));
-        EndModal(wxID_OK);
-        */
         _wynik = 2;
         ___saldo -= ___stawka;
         EndModal(wxID_CANCEL);
         WynikDialog gra(this);
         gra.ShowModal();
         return;
-    } /*
-    else if (playerValue == 21) {
-        Delay(1500);
-        /*
-        wxMessageBox(_("Za dużo! Wygrywa krupier!"));
-        EndModal(wxID_OK);
-
-        _wynik = 1;
-        ___saldo += ___stawka;
-        EndModal(wxID_CANCEL);
-        WynikDialog gra(this);
-        gra.ShowModal();
-        return;
     }
-    */
     FlexUzytkownik->Layout();
     Layout();
     Fit();
     Button1->Enable();
     Button2->Enable();
     Button3->Enable();
-    Button4->Enable();
     Layout();
     Fit();
 }
@@ -310,7 +261,6 @@ void GraDialog::StandClick(wxCommandEvent& event)
     Button1->Disable();
     Button2->Disable();
     Button3->Disable();
-    Button4->Disable();
     Layout();
     Fit();
     RefreshGameLayout();
@@ -319,11 +269,8 @@ void GraDialog::StandClick(wxCommandEvent& event)
     int newHeight = 80 * 1.6;
     bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
     dealerCards[1]->SetBitmap(bmp);
-
-    //dealerCardPaths.push_back(cardPaths[dealerHiddenCardIndex]);
     dealerValue = AdjustForAces(dealerCardPaths);
     UpdateDealerValue();
-
     FlexKrupier->Layout();
     Layout();
     Fit();
@@ -335,20 +282,15 @@ int GraDialog::GetCardValue(const wxString& path)
 {
     wxFileName fn(path);
     wxString name = fn.GetName(); // "hearts_10"
-
     wxArrayString parts = wxSplit(name, '_');
     if (parts.size() != 2)
         return 0;
-
     wxString rank = parts[1];
-
     if (rank == "A") return 11;
     if (rank == "K" || rank == "Q" || rank == "J") return 10;
-
     long num = 0;
     if (rank.ToLong(&num))
         return num;
-
     return 0;
 }
 
@@ -375,34 +317,25 @@ void GraDialog::DealerPlay()
         wxSafeYield();
         Delay(1000);
         int index = rand() % deck.size();
-
         wxBitmap bmp = deck[index];
         int newWidth = 100;
         int newHeight = 80 * 1.6;
         bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
         wxStaticBitmap* card = new wxStaticBitmap(this, wxID_ANY, bmp);
-
         FlexKrupier->Add(card, 1, wxALL | wxALIGN_CENTER, 5);
         RefreshGameLayout();
         dealerCards.push_back(card);
         dealerCardPaths.push_back(cardPaths[index]);
         Layout();
         Fit();
-
         dealerValue = AdjustForAces(dealerCardPaths);
         UpdateDealerValue();
 
     }
-
-
     // po dobraniu sprawdz czy przekroczone 21
     if (dealerValue > 21)
     {
         Delay(1500);
-        /*
-        wxMessageBox(_("Krupier ma za dużo! Wygrywa użytkownik!"));
-        EndModal(wxID_OK);
-        */
         _wynik = 1;
         ___saldo += ___stawka;
         EndModal(wxID_CANCEL);
@@ -410,14 +343,10 @@ void GraDialog::DealerPlay()
         gra.ShowModal();
         return;
     }
-
     // Inaczej porownaj z graczem i jego wartoscia
     if (dealerValue > playerValue)
     {
         Delay(2500);
-        /*
-        wxMessageBox(_("Wygrywa Krupier"));
-        */
         _wynik = 2;
         ___saldo -= ___stawka;
         EndModal(wxID_CANCEL);
@@ -427,9 +356,6 @@ void GraDialog::DealerPlay()
     else if (dealerValue < playerValue)
     {
         Delay(2500);
-        /*
-        wxMessageBox(_("Wygrywa Użytkownik"));
-        */
         _wynik = 1;
         ___saldo += ___stawka;
         EndModal(wxID_CANCEL);
@@ -438,15 +364,11 @@ void GraDialog::DealerPlay()
     }
     else
     {
-        /*
-        Delay(1500);
-        wxMessageBox(_("Remis (zwrot kwoty)"));
-        */
-            Delay(2500);
-            _wynik = 0;
-            EndModal(wxID_CANCEL);
-            WynikDialog gra(this);
-            gra.ShowModal();
+        Delay(2500);
+        _wynik = 0;
+        EndModal(wxID_CANCEL);
+        WynikDialog gra(this);
+        gra.ShowModal();
     }
 
 }
@@ -463,27 +385,23 @@ int GraDialog::AdjustForAces(const std::vector<wxString>& paths)
 {
     int total = 0;
     int aceCount = 0;
-
     for (const auto& path : paths)
     {
         int v = GetCardValue(path);
         total += v;
-
         wxFileName fn(path);
         wxString name = fn.GetName();
         wxArrayString parts = wxSplit(name, '_');
         wxString rank = parts[1];
-
         if (rank == "A")
             aceCount++;
     }
 
     while (total > 21 && aceCount > 0)
     {
-        total -= 10; // downgrade one Ace from 11 to 1
+        total -= 10; // zamien asa na 1
         aceCount--;
     }
-
     return total;
 }
 void GraDialog::CheckForNaturalBlackjack()
@@ -492,18 +410,10 @@ void GraDialog::CheckForNaturalBlackjack()
     {
         int v1 = GetCardValue(playerCardPaths[0]);
         int v2 = GetCardValue(playerCardPaths[1]);
-
         int total = v1 + v2;
-
-
         if (total == 21)
         {
             Delay(2500);
-
-            /*
-            wxMessageBox(_("Blackjack! Wygrywa użytkownik"));
-            EndModal(wxID_OK);
-            */
             ___saldo += ___stawka;
             _wynik = 1;
             EndModal(wxID_CANCEL);
@@ -515,66 +425,49 @@ void GraDialog::CheckForNaturalBlackjack()
 
 void GraDialog::Delay(int ms)
 {
-    wxSafeYield(); //KLUCZOWA ILINIJKA!!!!
+    wxSafeYield(); //KLUCZOWA ILINIJKA!!!! zapobiega wywalaniu sie okienek
     wxMilliSleep(ms);
-    wxYield(); // keeps UI responsive
+    wxYield();
 }
 
 
 void GraDialog::DoubleClick(wxCommandEvent& event)
 {
-    Button1->Disable();
-    Button2->Disable();
-    Button3->Disable();
-    Button4->Disable();
-    Layout();
-    Fit();
-
-    ___stawka = ___stawka * 2;
-
-    // zawodnik dostaje jedna karte
-    int index = rand() % deck.size();
-    wxBitmap bmp = deck[index];
-    int newWidth = 100;
-    int newHeight = 80 * 1.6;
-    bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
-    wxStaticBitmap* card = new wxStaticBitmap(this, wxID_ANY, bmp);
-
-    FlexUzytkownik->Add(card, 1, wxALL | wxALIGN_CENTER, 5);
-    playerCards.push_back(card);
-    playerCardPaths.push_back(cardPaths[index]);
-
-    playerValue = AdjustForAces(playerCardPaths);
-    UpdatePlayerValue();
-
-    FlexUzytkownik->Layout();
-    Layout();
-    Fit();
-
-    if (playerValue > 21) // zawodnik po double ma za duzo
-    {
-        Delay(2500);
-        /*
-        wxMessageBox(_("Za dużo! Wygrywa krupier!"));
-        EndModal(wxID_OK);
-        */
-        _wynik = 2;
-        ___saldo -= ___stawka;
-        EndModal(wxID_CANCEL);
-        WynikDialog gra(this);
-        gra.ShowModal();
+    if((___saldo - (2 * ___stawka) >= 0)){ // moze zagrac jezeli ma wystarczajaca ilosc pieniedzy
+        Button1->Disable();
+        Button2->Disable();
+        Button3->Disable();
+        Layout();
+        Fit();
+        ___stawka = ___stawka * 2;
+        // zawodnik dostaje jedna karte
+        int index = rand() % deck.size();
+        wxBitmap bmp = deck[index];
+        int newWidth = 100;
+        int newHeight = 80 * 1.6;
+        bmp = bmp.ConvertToImage().Rescale(newWidth, newHeight, wxIMAGE_QUALITY_HIGH);
+        wxStaticBitmap* card = new wxStaticBitmap(this, wxID_ANY, bmp);
+        FlexUzytkownik->Add(card, 1, wxALL | wxALIGN_CENTER, 5);
+        playerCards.push_back(card);
+        playerCardPaths.push_back(cardPaths[index]);
+        playerValue = AdjustForAces(playerCardPaths);
+        UpdatePlayerValue();
+        FlexUzytkownik->Layout();
+        Layout();
+        Fit();
+        if (playerValue > 21) // zawodnik po double ma za duzo
+        {
+            Delay(2500);
+            _wynik = 2;
+            ___saldo -= ___stawka;
+            EndModal(wxID_CANCEL);
+            WynikDialog gra(this);
+            gra.ShowModal();
+            return;
+        }
+        StandClick(event);
+    } else {
+        wxMessageBox(_("Nie możesz zagrać double, nie masz wystarczającej ilości pieniędzy"), _("Błąd"), wxICON_EXCLAMATION | wxICON_ERROR);
         return;
     }
-    /*
-    if (playerValue == 21){
-        Delay(1500);
-        _wynik = 1;
-        ___saldo += ___stawka;
-        EndModal(wxID_CANCEL);
-        WynikDialog gra(this);
-        gra.ShowModal();
-    }
-    */
-
-    StandClick(event);
 }

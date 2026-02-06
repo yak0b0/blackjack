@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="WynikDialog">
+		<title>WYNIK</title>
+		<centered>1</centered>
+		<bg>#FFFFFF</bg>
 		<object class="wxFlexGridSizer" variable="FlexGridSizer1" member="no">
 			<cols>2</cols>
 			<rows>1</rows>

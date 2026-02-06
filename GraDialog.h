@@ -23,7 +23,6 @@ class GraDialog: public wxDialog
         wxButton* Button1;
         wxButton* Button2;
         wxButton* Button3;
-        wxButton* Button4;
         wxStaticBitmap* KrupierBitmap;
         wxStaticText* StaticText1;
         wxStaticText* StaticText2;
@@ -46,7 +45,6 @@ class GraDialog: public wxDialog
         static const wxWindowID ID_BUTTON1;
         static const wxWindowID ID_BUTTON2;
         static const wxWindowID ID_BUTTON3;
-        static const wxWindowID ID_BUTTON4;
         //*)
 
     private:
@@ -63,37 +61,25 @@ class GraDialog: public wxDialog
         std::vector<wxBitmap> deck;
         wxBitmap cardBack;
         std::vector<wxString> cardPaths;
-
-
         std::vector<wxStaticBitmap*> playerCards;
         std::vector<wxStaticBitmap*> dealerCards;
         std::vector<wxString> playerCardPaths;
         std::vector<wxString> dealerCardPaths;
-
-
         void LoadCards();
         void DealInitialPlayerCards();
         void DealInitialDealerCards();
-
         int GetCardValue(const wxString& path);
         void UpdatePlayerValue();
         void UpdateDealerValue();
-
         int playerValue = 0;
         int dealerValue = 0;
         int dealerHiddenCardIndex = -1;
-
         void DealerPlay();
         void CheckForNaturalBlackjack();
         void Delay(int ms);
-
         wxMediaCtrl * media;
         void RefreshGameLayout();
-
         int AdjustForAces(const std::vector<wxString>& paths);
-
-
-
         DECLARE_EVENT_TABLE()
 };
 
